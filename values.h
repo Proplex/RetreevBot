@@ -19,6 +19,10 @@ CREATE_RIGHT_TURN: The Create is rather poor in measuring angles so it needs to 
 
 CREATE_ZERO: The degrees the function setzero() should set. This should always be 0.
 
+CREATE_180_TURN:  The Create is rather poor in measuring angles so it needs to be set manually. In order to perform a 180 degree turnaround, input the degree the Create would report.
+
+CREATE_TURN_SPEED_SLOW: A slower speed at which the create should turn. Mostly called by 180 degree functions, don't make it too fast or else things will fly off the Create.
+
 CREATE_TURN_SPEED: The speed of the Create while turning. (0-500)
 
 CREATE_FORWARD_SPEED: The speed of the Create while going forward. MUST BE NEGATIVE (0-500)
@@ -26,13 +30,15 @@ CREATE_FORWARD_SPEED: The speed of the Create while going forward. MUST BE NEGAT
 SENSOR_IR: The port where the IR sensor will be found. Will be analog, so it should always be under 7. (0-7)
 
 SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010) 
+
+
 */
 
 void values() {
 	lightvalue=950;
 	debugmode=1;
 	createmode=1;
-  create_warn_batt=25;
+    create_warn_batt=25;
 	forcemode=1;
 	create_left_turn=70;
 	create_right_turn=-75;
@@ -44,6 +50,6 @@ void values() {
 	create_180_turn=160;
 	sensor_f_IR=0;
 	sensor_f_IR_dark=300;
-  sensor_r_IR_dark=300;
-  sensor_r_IR=1;
+    sensor_r_IR_dark=300;
+    sensor_r_IR=1;
 }
