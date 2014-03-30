@@ -5,7 +5,7 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 #include "setvar.h"
 #include "values.h"
 #include "threads.h"
-
+#include "setvar.h"
 
 
 //Init function that starts most things needed for the Retreev
@@ -116,6 +116,25 @@ void continue_until(int action) {
 			create_drive_straight(create_forward_speed);
 		}
 }
+	if(action==3){
+		if(debugmode==1) printf("Going forward until black line found\n");
+		while(analog10(sensor_rt_IR) < sensor_rt_IR_dark || analog10(sensor_l_IR) < sensor_l_IR_dark) {
+			create_drive_straight(create_forward_speed);
+			if (debugmode==1) printf("RGHT: %d LFT: %d\n",analog10(sensor_rt_IR),analog10(sensor_l_IR));
+		}
+		setzero_distance();
+		while(get_create_distance() > -180) {
+			create_drive_straight(create_forward_speed);
+		}
+}
+	if(action==4){
+		if(debugmode==1) printf("Going forward until end of black line\n");
+		while(analog10(sensor_f_IR) > sensor_f_IR_dark) {
+			create_drive_straight(create_forward_speed);
+			if (debugmode==1) printf("F: %d\n",analog10(sensor_f_IR),analog10(sensor_f_IR));
+		}
+}
+
 }
 
 void create_180() {
@@ -128,9 +147,24 @@ void create_180() {
 
 void turn_until(int action2) {
 	if(action2==1) {
-		if(debugmode==1) printf("Turning left until black line\n");
-			while(analog10(sensor_f_IR) < sensor_f_IR_dark) {
+		if(debugmode==1) printf("Turning until black line alignment\n");
+			while(analog10(sensor_f_IR) < sensor_f_IR_dark || analog10(sensor_r_IR) < sensor_r_IR_dark) {
 				create_spin_CCW(create_turn_speed_slow);
+				if (debugmode==1) printf("F: %d R: %d\n",analog10(sensor_f_IR),analog10(sensor_r_IR));
 			}
-		}
+		
+}
+}
+void create_black_align() {
+	setzero_distance();
+	while(get_create_distance() < 4) {
+		create_drive_straight(create_backward_speed_slow);
+	}
+}
+
+void create_go_distance(int distance_create) {
+	setzero_distance();
+	while(get_create_distance() < distance_create) {
+		create_drive_straight(create_backward_speed);
+	}
 }

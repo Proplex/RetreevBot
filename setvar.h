@@ -16,6 +16,7 @@ int createmode;
 float create_battery;
 float create_battery_total;
 int create_turn_speed_slow;
+int create_backward_speed_slow;
 float create_battery_now;
 int create_warn_batt;
 int create_backward_speed;
@@ -29,6 +30,10 @@ int sensor_f_IR;
 int sensor_f_IR_dark;
 int sensor_r_IR_dark;
 int sensor_r_IR;
+int sensor_l_IR_dark;
+int sensor_l_IR;
+int sensor_rt_IR_dark;
+int sensor_rt_IR;
 int create_180_turn;
 int create_distance;
 
