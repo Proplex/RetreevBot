@@ -6,5 +6,5 @@ int main() {
 	create_black_align();
 	turn_until(1);
 	continue_until(4);
-	create_go_distance(-1000);
+	create_go_distance(-750);
 }
