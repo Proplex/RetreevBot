@@ -36,4 +36,5 @@ int sensor_rt_IR_dark;
 int sensor_rt_IR;
 int create_180_turn;
 int create_distance;
+int claw_switch;
 

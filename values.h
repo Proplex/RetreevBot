@@ -51,4 +51,5 @@ void values() {
 	sensor_rt_IR=2;
 	sensor_l_IR_dark=860;
 	sensor_l_IR=3;
+	claw_switch=10;
 }
