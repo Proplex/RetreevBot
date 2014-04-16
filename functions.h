@@ -71,7 +71,7 @@ void setzero_angle() { //This normalizes the angle distance the Create uses to m
 
 void setzero_distance() { //This normalizes the angle distance the Create uses to measure how far it has turned. The value can be set using create_zero, found in values.h
 	set_create_distance(create_zero);
-	if(debugmode==1) printf("Angle measure set to %d\n", create_zero);
+	if(debugmode==1) printf("Distance measure set to %d\n", create_zero);
 }
 void create_direct_left() { //This turns the Create, in place, 90 degrees to the left.
 	setzero_angle();
@@ -162,9 +162,11 @@ void create_black_align() {
 	}
 }
 
-void create_go_distance(int distance_create) {
+void create_go_forward(int distance_create) {
 	setzero_distance();
-	while(get_create_distance() < distance_create) {
-		create_drive_straight(create_backward_speed);
+	distance_create=distance_create*-1;
+	while(get_create_distance() > distance_create) {
+		if(debugmode==1) printf("Going %d distance. Currently at %d.\n",distance_create,get_create_distance());
+		create_drive_straight(create_forward_speed);
 	}
 }
