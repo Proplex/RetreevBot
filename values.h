@@ -1,6 +1,6 @@
 #include "setvar.h"
-/* 
-This is a file that sets variables for the various Retreev functions. Editing these numbers is not recommended unless it's necessary. 
+/*
+This is a file that sets variables for the various Retreev functions. Editing these numbers is not recommended unless it's necessary.
 
 VALUE KEY:
 LIGHTVALUE: Default light sensor value, to allow for light-start but without having to calibrate every time. (1-1010, analog)
@@ -25,7 +25,7 @@ CREATE_FORWARD_SPEED: The speed of the Create while going forward. MUST BE NEGAT
 
 SENSOR_IR: The port where the IR sensor will be found. Will be analog, so it should always be under 7. (0-7)
 
-SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010) 
+SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010)
 */
 
 void values() {
