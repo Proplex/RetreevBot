@@ -5,7 +5,7 @@ This also includes the functions that each thread will call for ease of use.
 */
 void servolock() {
 	while(1){
-	set_servo_position(1,1860);
+	set_servo_position(1,1900);
     sleep(2);
 	}
 }
