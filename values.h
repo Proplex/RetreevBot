@@ -32,7 +32,7 @@ void values() {
 	lightvalue=950;
 	debugmode=1;
 	createmode=1;
-	create_warn_batt=25;
+	create_warn_batt=30;
 	forcemode=1;
 	create_left_turn=65;
 	create_right_turn=-75;
