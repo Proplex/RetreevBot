@@ -172,7 +172,7 @@ void create_go_forward(int distance_create) {
     setzero_distance();
     distance_create=distance_create*-1;
     while(get_create_distance() > distance_create) {
-        if(debugmode==1) printf("Going %d distance. Currently at %d.\n",distance_create,get_create_distance());
+        if(debugmode==1) printf("Going %d. At %d.\n",distance_create,get_create_distance());
         create_drive_straight(create_forward_speed);
     }
 }
