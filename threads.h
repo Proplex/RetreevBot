@@ -10,10 +10,9 @@ void servolock() {
 	}
 }
 
-void thread_start_servolock() {	
+void thread_start_servolock() {
 	thread tid;
 	tid = thread_create(servolock);
 	thread_start(tid);
   	if(debugmode==1) printf("Servo lock thread started. \n");
 }
-
