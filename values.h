@@ -28,28 +28,29 @@ SENSOR_IR: The port where the IR sensor will be found. Will be analog, so it sho
 SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010)
 */
 
+#DEFINE lightvalue 950
+#DEFINE debugmode 1
+#DEFINE createmode 1
+#DEFINE create_warn_batt 25
+#DEFINE forcemode 1
+#DEFINE create_zero 0
+#DEFINE sensor_f_IR 0
+#DEFINE sensor_f_IR_dark 300
+#DEFINE sensor_r_IR 1
+#DEFINE sensor_r_IR_dark 300
+#DEFINE sensor_rt_IR 2
+#DEFINE sensor_rt_IR_dark 860
+#DEFINE sensor_l_IR 3
+#DEFINE sensor_l_IR_dark 860
+#DEFINE claw_switch 10
+
+
+
 void values() {
-	lightvalue=950;
-	debugmode=1;
-	createmode=1;
-	create_warn_batt=25;
-	forcemode=1;
 	create_left_turn=65;
 	create_right_turn=-75;
-	create_zero=0;
 	create_turn_speed=250;
 	create_forward_speed=-200;
 	create_backward_speed=200;
-	create_backward_speed_slow=100;
-	create_turn_speed_slow=50;
 	create_180_turn=160;
-	sensor_f_IR=0;
-	sensor_f_IR_dark=300;
-	sensor_r_IR_dark=300;
-	sensor_r_IR=1;
-	sensor_rt_IR_dark=860;
-	sensor_rt_IR=2;
-	sensor_l_IR_dark=860;
-	sensor_l_IR=3;
-	claw_switch=10;
 }
