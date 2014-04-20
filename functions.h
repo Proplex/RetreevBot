@@ -5,7 +5,7 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 #include "setvar.h"
 #include "values.h"
 #include "threads.h"
-
+#include <stdbool.h>
 
 
 //Init function inthat starts most things needed for the Retreev
@@ -134,14 +134,17 @@ void continue_until(int action) {
             if (debugmode==1) printf("F: %d\n",analog10(sensor_f_IR),analog10(sensor_f_IR));
         }
     }
-    if(action==5){
+}
+
+bool wait_for_claw() {
         if(debugmode==1) printf("Going forward until claw trigger is hit\n");
         while(digital(claw_switch) == 0) {
-			create_drive_straight(create_forward_speed);
-			if(debugmode==1) printf("S: %d\n",digital(claw_switch));
-    }
+            return false
+        } else {
+            return true
+        }
 }
-}
+
 void create_180() {
     setzero_angle();
     if(debugmode==1) printf("Turning around\n");
@@ -176,5 +179,3 @@ void create_go_forward(int distance_create) {
         create_drive_straight(create_forward_speed);
     }
 }
-
-
