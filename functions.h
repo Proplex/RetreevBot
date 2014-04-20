@@ -5,7 +5,7 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 #include "setvar.h"
 #include "values.h"
 #include "threads.h"
-#include "setvar.h"
+
 
 
 //Init function inthat starts most things needed for the Retreev
