@@ -127,21 +127,25 @@ void continue_until(int action) {
             create_drive_straight(create_forward_speed);
         }
     }
-    if(action==4){
-        if(debugmode==1) printf("Going forward until end of black line\n");
-        while(analog10(sensor_f_IR) > sensor_f_IR_dark) {
-            create_drive_straight(create_forward_speed);
-            if (debugmode==1) printf("F: %d\n",analog10(sensor_f_IR),analog10(sensor_f_IR));
-        }
+
+}
+
+bool wait_for_line() {
+    if(debugmode==1) printf("Going forward until end of black line\n");
+    while(analog10(sensor_f_IR) > sensor_f_IR_dark) {
+        return true;
+    } else {
+        return false;
     }
 }
+
 
 bool wait_for_claw() {
         if(debugmode==1) printf("Going forward until claw trigger is hit\n");
         while(digital(claw_switch) == 0) {
-            return false
+            return false;
         } else {
-            return true
+            return true;
         }
 }
 
