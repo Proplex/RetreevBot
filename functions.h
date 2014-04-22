@@ -130,17 +130,31 @@ void continue_until(int action) {
 
 }
 
-bool wait_for_line() {
-    if(debugmode==1) printf("Going forward until end of black line\n");
-    while(analog10(sensor_f_IR) > sensor_f_IR_dark) {
+bool isdark_front() {
+    while(analog10(sensor_f_IR) < sensor_f_IR_dark) {
         return true;
     } else {
         return false;
     }
 }
 
+bool isdark_right() {
+    while(analog10(sensor_rt_IR) < sensor_rt_IR_dark {
+        return true;
+    } else {
+        return false;
+    }
+}
 
-bool wait_for_claw() {
+bool isdark_left() {
+    while(analog10(sensor_l_IR) < sensor_l_dark {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool claw_button() {
         if(debugmode==1) printf("Going forward until claw trigger is hit\n");
         while(digital(claw_switch) == 0) {
             return false;
