@@ -4,7 +4,11 @@ int main() {
 	create_direct_left();
 	continue_until(2);
 	create_black_align();
-	turn_until(1);
-	continue_until(4);
+	while(isdark_right && isdark_left == false) {
+		create_drive_straight(create_forward_speed)
+	}
+	while(isdark_front == true) {
+		create_drive_straight(create_forward_speed);
+	}
 	create_go_forward(1200);
 }
