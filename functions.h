@@ -99,7 +99,7 @@ bool isdark_front() {
 }
 
 bool isdark_right() {
-    while(analog10(sensor_rt_IR) < sensor_rt_IR_dark {
+    while(analog10(sensor_rt_IR) < sensor_rt_IR_dark) {
         return true;
     } else {
         return false;
@@ -107,7 +107,7 @@ bool isdark_right() {
 }
 
 bool isdark_left() {
-    while(analog10(sensor_l_IR) < sensor_l_dark {
+    while(analog10(sensor_l_IR) < sensor_l_dark) {
         return true;
     } else {
         return false;
