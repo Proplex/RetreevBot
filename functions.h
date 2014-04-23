@@ -90,46 +90,6 @@ void create_direct_right() {
     }
 }
 
-void continue_until(int action) {
-    if(action==1){
-        if(debugmode==1) printf("Going forward until black line found\n");
-        while(analog10(sensor_f_IR) < sensor_f_IR_dark) {
-            create_drive_straight(create_forward_speed);
-        }
-        setzero_distance();
-        while(analog10(sensor_r_IR) < sensor_r_IR_dark) {
-            create_drive_straight(create_forward_speed);
-        }
-        create_distance=(get_create_distance()/2)*-1;
-        setzero_distance();
-        while(create_distance < 0) {
-            create_drive_straight(create_backward_speed);
-        }
-    }
-    if(action==2){
-        if(debugmode==1) printf("Going forward until black line found\n");
-        while(analog10(sensor_f_IR) < sensor_f_IR_dark) {
-            create_drive_straight(create_forward_speed);
-        }
-        setzero_distance();
-        while(get_create_distance() > -180) {
-            create_drive_straight(create_forward_speed);
-        }
-    }
-    if(action==3){
-        if(debugmode==1) printf("Going forward until black line found\n");
-        while(analog10(sensor_rt_IR) < sensor_rt_IR_dark || analog10(sensor_l_IR) < sensor_l_IR_dark) {
-            create_drive_straight(create_forward_speed);
-            if (debugmode==1) printf("RGHT: %d LFT: %d\n",analog10(sensor_rt_IR),analog10(sensor_l_IR));
-        }
-        setzero_distance();
-        while(get_create_distance() > -180) {
-            create_drive_straight(create_forward_speed);
-        }
-    }
-
-}
-
 bool isdark_front() {
     while(analog10(sensor_f_IR) < sensor_f_IR_dark) {
         return true;
