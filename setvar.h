@@ -10,8 +10,6 @@ int objecttopy;
 int x;
 int y;
 int z;
-float create_battery;
-float create_battery_total;
 float create_battery_now;
 int create_backward_speed;
 int create_left_turn;

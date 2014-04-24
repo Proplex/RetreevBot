@@ -26,9 +26,7 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
         create_safe();
         if(debugmode==1) printf("Create is in safe mode\n");
     }
-    create_battery=get_create_battery_charge(); //These next few lines calculates the Create's battery, which is rather annoying since the Create itself doesn't have a function that does this. It will warn the user if the battery percentage is under the amount specified by create_warn_batt, found in values.h
-    create_battery_total=get_create_battery_capacity();
-    create_battery_now=(((double)create_battery)/create_battery_total)*100;
+    create_battery_now=(((double)get_create_battery_charge())/get_create_battery_capacity())*100;
     if (create_battery_now < create_warn_batt) {
         printf("!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\nCREATE BATTERY LOW. BATTERY AT %g%%\n!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\n", create_battery_now);
         sleep(3);
@@ -115,7 +113,6 @@ bool isdark_left() {
 }
 
 bool claw_button() {
-        if(debugmode==1) printf("Going forward until claw trigger is hit\n");
         while(digital(claw_switch) == 0) {
             return false;
         } else {
