@@ -43,14 +43,15 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #DEFINE sensor_l_IR 3
 #DEFINE sensor_l_IR_dark 860
 #DEFINE claw_switch 10
+#DEFINE create_left_turn 65
+#DEFINE create_right_turn -75
+#DEFINE create_turn_speed 250
+#DEFINE create_forward_speed 200
+#DEFINE create_backward_speed 200
+#DEFINE create_180_turn 160
 
 
 
 void values() {
-	create_left_turn=65;
-	create_right_turn=-75;
-	create_turn_speed=250;
-	create_forward_speed=-200;
-	create_backward_speed=200;
-	create_180_turn=160;
+	printf("There are currently no values\n")
 }

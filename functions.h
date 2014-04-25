@@ -124,7 +124,6 @@ void create_180() {
     setzero_angle();
     if(debugmode==1) printf("Turning around\n");
     while(get_create_normalized_angle() < create_180_turn) {
-
         create_spin_CCW(create_turn_speed);
     }
 }
