@@ -52,14 +52,14 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
 }
 
 
-void camget() { //This function updates the visual frame and sets the object variables to the bounding boxes, etc.
+void camget() {
     camera_update();
     objectx=get_object_center(0,0).x;
     objecty=get_object_center(0,0).y;
     objecth=get_object_bbox(0,0).height;
     objectany=get_object_count(0);
     objecttopy=get_object_bbox(0,0).uly;
-    if(debugmode=1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
+    if(debugmode==1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
 }
 
 void setzero_angle() { //This normalizes the angle distance the Create uses to measure how far it has turned. The value can be set using create_zero, found in values.h
@@ -89,7 +89,7 @@ void create_direct_right() {
 }
 
 bool isdark_front() {
-    while(analog10(sensor_f_IR) < sensor_f_IR_dark) {
+    if(analog10(sensor_f_IR) > sensor_f_IR_dark) {
         return true;
     } else {
         return false;
@@ -97,7 +97,7 @@ bool isdark_front() {
 }
 
 bool isdark_right() {
-    while(analog10(sensor_rt_IR) < sensor_rt_IR_dark) {
+    if(analog10(sensor_rt_IR) > sensor_rt_IR_dark) {
         return true;
     } else {
         return false;
@@ -105,7 +105,7 @@ bool isdark_right() {
 }
 
 bool isdark_left() {
-    while(analog10(sensor_l_IR) < sensor_l_dark) {
+    if(analog10(sensor_l_IR) > sensor_l_IR_dark) {
         return true;
     } else {
         return false;
@@ -113,7 +113,7 @@ bool isdark_left() {
 }
 
 bool claw_button() {
-        while(digital(claw_switch) == 0) {
+        if(digital(claw_switch) == 0) {
             return false;
         } else {
             return true;
@@ -132,7 +132,7 @@ void turn_until(int action2) {
     if(action2==1) {
         if(debugmode==1) printf("Turning until black line alignment\n");
         while(analog10(sensor_f_IR) < sensor_f_IR_dark || analog10(sensor_r_IR) < sensor_r_IR_dark) {
-            create_spin_CCW(create_turn_speed_slow);
+            create_spin_CCW(create_turn_speed);
             if (debugmode==1) printf("F: %d R: %d\n",analog10(sensor_f_IR),analog10(sensor_r_IR));
         }
 
@@ -141,7 +141,7 @@ void turn_until(int action2) {
 void create_black_align() {
     setzero_distance();
     while(get_create_distance() < 4) {
-        create_drive_straight(create_backward_speed_slow);
+        create_drive_straight(create_backward_speed);
     }
 }
 

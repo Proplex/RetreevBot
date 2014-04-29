@@ -28,30 +28,30 @@ SENSOR_IR: The port where the IR sensor will be found. Will be analog, so it sho
 SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010)
 */
 
-#DEFINE lightvalue 950
-#DEFINE debugmode 1
-#DEFINE createmode 1
-#DEFINE create_warn_batt 25
-#DEFINE forcemode 1
-#DEFINE create_zero 0
-#DEFINE sensor_f_IR 0
-#DEFINE sensor_f_IR_dark 300
-#DEFINE sensor_r_IR 1
-#DEFINE sensor_r_IR_dark 300
-#DEFINE sensor_rt_IR 2
-#DEFINE sensor_rt_IR_dark 860
-#DEFINE sensor_l_IR 3
-#DEFINE sensor_l_IR_dark 860
-#DEFINE claw_switch 10
-#DEFINE create_left_turn 65
-#DEFINE create_right_turn -75
-#DEFINE create_turn_speed 250
-#DEFINE create_forward_speed 200
-#DEFINE create_backward_speed 200
-#DEFINE create_180_turn 160
+#define lightvalue 950
+#define debugmode 1
+#define createmode 1
+#define create_warn_batt 25
+#define forcemode 1
+#define create_zero 0
+#define sensor_f_IR 0
+#define sensor_f_IR_dark 300
+#define sensor_r_IR 1
+#define sensor_r_IR_dark 300
+#define sensor_rt_IR 2
+#define sensor_rt_IR_dark 860
+#define sensor_l_IR 3
+#define sensor_l_IR_dark 860
+#define claw_switch 10
+#define create_left_turn 65
+#define create_right_turn -75
+#define create_turn_speed 250
+#define create_forward_speed -200
+#define create_backward_speed 200
+#define create_180_turn 160
 
 
 
 void values() {
-	printf("There are currently no values\n")
+	printf("There are currently no values\n");
 }
