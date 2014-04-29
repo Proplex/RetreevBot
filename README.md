@@ -1,4 +1,4 @@
-The following program is to be used for a tournament using a Kovan brick and an iCreate, using the default KISS firmware. It aims to be modular, and easily changed without mucking through functions.  
+The following program is to be used with Kovan brick and an iCreate, using the default KISS firmware. It aims to be modular, and easily changed without mucking through functions.  
 
 Most functions have not be commented, but will be done in time
 
