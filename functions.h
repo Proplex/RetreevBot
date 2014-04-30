@@ -5,7 +5,7 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 #include "setvar.h"
 #include "values.h"
 #include "threads.h"
-#include <stdbool.h>
+#include "booleans.h"
 
 
 //Init function inthat starts most things needed for the Retreev
@@ -16,7 +16,6 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
     if(debugmode==1) printf("Camera started. \n");
     enable_servos();
     if(debugmode==1) printf("Servos enabled. \n");
-    thread_start_servolock();
     create_connect();
     if(debugmode==1) printf("Create connected. \n");
     if (createmode==1){ //This if statement reads the createmode value and sets it accordingly
@@ -88,38 +87,6 @@ void create_direct_right() {
     }
 }
 
-bool isdark_front() {
-    if(analog10(sensor_f_IR) > sensor_f_IR_dark) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool isdark_right() {
-    if(analog10(sensor_rt_IR) > sensor_rt_IR_dark) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool isdark_left() {
-    if(analog10(sensor_l_IR) > sensor_l_IR_dark) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool claw_button() {
-        if(digital(claw_switch) == 0) {
-            return false;
-        } else {
-            return true;
-        }
-}
-
 void create_180() {
     setzero_angle();
     if(debugmode==1) printf("Turning around\n");
@@ -132,7 +99,7 @@ void turn_until(int action2) {
     if(action2==1) {
         if(debugmode==1) printf("Turning until black line alignment\n");
         while(analog10(sensor_f_IR) < sensor_f_IR_dark || analog10(sensor_r_IR) < sensor_r_IR_dark) {
-            create_spin_CCW(create_turn_speed);
+            create_spin_CCW(create_turn_speed_slow);
             if (debugmode==1) printf("F: %d R: %d\n",analog10(sensor_f_IR),analog10(sensor_r_IR));
         }
 
@@ -141,8 +108,18 @@ void turn_until(int action2) {
 void create_black_align() {
     setzero_distance();
     while(get_create_distance() < 4) {
-        create_drive_straight(create_backward_speed);
+        create_drive_straight(create_backward_speed_slow);
     }
+	/*
+	setzero_angle();
+	while(get_create_angle() < 4) {
+		create_spin_CW(100);
+	}
+    setzero_distance();
+    while(get_create_distance() < -4) {
+        create_drive_straight(create_forward_speed_slow);
+    }
+	*/
 }
 
 void create_go_forward(int distance_create) {
@@ -152,4 +129,12 @@ void create_go_forward(int distance_create) {
         if(debugmode==1) printf("Going %d. At %d.\n",distance_create,get_create_distance());
         create_drive_straight(create_forward_speed);
     }
+}
+
+void raise_claw {
+    /* Claw raise stuff */
+}
+
+void lower_claw {
+    /* Lower claw */
 }

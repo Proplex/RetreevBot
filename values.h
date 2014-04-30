@@ -35,19 +35,22 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define forcemode 1
 #define create_zero 0
 #define sensor_f_IR 0
-#define sensor_f_IR_dark 300
+#define sensor_f_IR_dark 800
 #define sensor_r_IR 1
-#define sensor_r_IR_dark 300
+#define sensor_r_IR_dark 800
 #define sensor_rt_IR 2
-#define sensor_rt_IR_dark 860
+#define sensor_rt_IR_dark 800
 #define sensor_l_IR 3
-#define sensor_l_IR_dark 860
+#define sensor_l_IR_dark 800
 #define claw_switch 10
 #define create_left_turn 65
 #define create_right_turn -75
 #define create_turn_speed 250
+#define create_turn_speed_slow 100
+#define create_forward_speed_slow -100
 #define create_forward_speed -200
 #define create_backward_speed 200
+#define create_backward_speed_slow 100
 #define create_180_turn 160
 
 
