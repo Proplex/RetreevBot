@@ -14,4 +14,7 @@ int main() {
 	while(isdark_front()) {
 		create_drive_straight(create_forward_speed);
 	}
+	while(ispress_switch() == false) {
+		create_drive_straight(create_forward_speed_slow);
+	}
 }
