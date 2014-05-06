@@ -24,8 +24,16 @@ bool isdark_left() {
     }
 }
 
-bool ispress_switch() {
+bool ispress_claw() {
         if(digital(claw_switch) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+}
+
+bool ispress_height() {
+        if(digital(height_switch) == 1) {
             return true;
         } else {
             return false;

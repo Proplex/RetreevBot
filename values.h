@@ -42,7 +42,7 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define sensor_rt_IR_dark 800
 #define sensor_l_IR 3
 #define sensor_l_IR_dark 800
-#define claw_switch 10
+#define claw_switch 15
 #define create_left_turn 65
 #define create_right_turn -75
 #define create_turn_speed 250
@@ -52,9 +52,15 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define create_backward_speed 200
 #define create_backward_speed_slow 100
 #define create_180_turn 160
-
-
+#define claw_servo 1
+#define claw_open_pos 100
+#define claw_close_pos 2000
+#define claw_down_speed -20
+#define claw_up_speed_max 50
+#define claw_up_speed_min 1
+#define claw_motor 1
+#define height_switch 10
 
 void values() {
-	printf("There are currently no values\n");
+	claw_speed=claw_up_speed_min;
 }

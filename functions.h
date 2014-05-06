@@ -8,10 +8,9 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 #include "booleans.h"
 
 
-//Init function inthat starts most things needed for the Retreev
+//Init function that starts most things needed for the Retreev
 void init(int port) { //Port refers to the analog port used to grab light sensor information
     values(); //Sets all values found in values.h. THIS SHOULD ALWAYS BE FIRST OR ELSE THINGS /WILL/ BREAK
-    camera_open(LOW_RES);
     display_clear(); //The camera library is somehow buggy and outputs a ton of garbage warnings when starting up. This at least gets rid of it.
     if(debugmode==1) printf("Camera started. \n");
     enable_servos();
@@ -50,17 +49,17 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
 
 }
 
-
+/*
 void camget() {
-    camera_update();
-    objectx=get_object_center(0,0).x;
-    objecty=get_object_center(0,0).y;
-    objecth=get_object_bbox(0,0).height;
-    objectany=get_object_count(0);
-    objecttopy=get_object_bbox(0,0).uly;
-    if(debugmode==1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
+camera_update();
+objectx=get_object_center(0,0).x;
+objecty=get_object_center(0,0).y;
+objecth=get_object_bbox(0,0).height;
+objectany=get_object_count(0);
+objecttopy=get_object_bbox(0,0).uly;
+if(debugmode==1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
 }
-
+*/
 void setzero_angle() { //This normalizes the angle distance the Create uses to measure how far it has turned. The value can be set using create_zero, found in values.h
     set_create_normalized_angle(create_zero);
     if(debugmode==1) printf("Angle measure set to %d\n", create_zero);
@@ -110,16 +109,16 @@ void create_black_align() {
     while(get_create_distance() < 4) {
         create_drive_straight(create_backward_speed_slow);
     }
-	/*
-	setzero_angle();
-	while(get_create_angle() < 4) {
-		create_spin_CW(100);
-	}
-    setzero_distance();
-    while(get_create_distance() < -4) {
-        create_drive_straight(create_forward_speed_slow);
-    }
-	*/
+    /*
+    setzero_angle();
+    while(get_create_angle() < 4) {
+    create_spin_CW(100);
+}
+setzero_distance();
+while(get_create_distance() < -4) {
+create_drive_straight(create_forward_speed_slow);
+}
+*/
 }
 
 void create_go_forward(int distance_create) {
@@ -131,10 +130,22 @@ void create_go_forward(int distance_create) {
     }
 }
 
-void raise_claw {
-    /* Claw raise stuff */
+void raise_claw() {
+    while(ispress_height() == false) {
+        motor(claw_motor,claw_up_speed_max);
+    }
 }
 
-void lower_claw {
+void lower_claw() {
     /* Lower claw */
+}
+
+void close_claw() {
+    if(debugmode==1) printf("Closing claw on port %d\n", claw_servo);
+    set_servo_position(claw_servo,claw_close_pos);
+}
+
+void open_claw() {
+    if(debugmode==1) printf("Opening claw on port %d\n", claw_servo);
+    set_servo_position(claw_servo,claw_open_pos);
 }
