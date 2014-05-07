@@ -47,3 +47,11 @@ bool ispressed_height() {
             return false;
         }
 }
+
+bool ispressed_bottom() {
+        if(digital(bottom_switch) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+}

@@ -39,9 +39,9 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
         if (debugmode==1) printf("Using predetermined light value: %d \n", lightvalue);
         set_b_button_text("Force");
         if (debugmode==1) printf("Current LS: %d \nWaiting for trigger or force", analog10(port));
-        while(analog10(port) > lightvalue && b_button()==0 && forcemode==0)
+        while(analog10(port) > lightvalue && b_button()==0) {}
     }
-    if(debugmode==1)printf("No startmode defined. Automatically starting in 2 seconds." \n);
+    if(debugmode==1)printf("No startmode defined. Automatically starting in 2 seconds.\n");
     sleep(2);
 }
 
@@ -90,7 +90,7 @@ void create_180() {
     }
 }
 
-void black_align {
+void black_align() {
     if(debugmode==1) printf("Turning until black line alignment\n");
     while(analog10(sensor_f_IR) < sensor_f_IR_dark || analog10(sensor_r_IR) < sensor_r_IR_dark) {
         create_spin_CCW(create_turn_speed_slow);
@@ -129,13 +129,17 @@ void raise_claw() {
         if(debugmode==1) printf("Lifting claw\n");
         motor(claw_motor,claw_up_speed_max);
     }
+	ao();
+	msleep(500);
 }
 
 void lower_claw() {
-    while(ispressed_height() == false) {
+    while(ispressed_bottom() == false) {
         if(debugmode==1) printf("Lifting claw\n");
         motor(claw_motor,claw_down_speed);
     }
+	ao();
+	msleep(500);
 }
 
 void close_claw() {

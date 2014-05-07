@@ -2,6 +2,8 @@
 
 int main() {
 	init(5);
+	raise_claw();
+	open_claw();
 	create_direct_left();
 	while(isdark_front() == false) {
 		create_drive_straight(create_forward_speed);
@@ -10,13 +12,13 @@ int main() {
 		create_drive_straight(create_forward_speed_slow);
 	}
 	create_black_align();
-	while(isdark_front() + isdark_rear() < 1) {
-		create_drive_straight(create_forward_speed_slow);
-	}
-	while(isdark_front()) {
+	while(isdark_front() == false) {
 		create_spin_CCW(create_turn_speed_slow);
 	}
-	while(ispressed_switch() == false) {
+	create_stop();
+	msleep(500);
+	lower_claw();
+	while(ispressed_claw() == false) {
 		create_drive_straight(create_forward_speed_slow);
 	}
 	close_claw();
