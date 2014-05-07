@@ -32,7 +32,7 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define debugmode 1
 #define createmode 1
 #define create_warn_batt 25
-#define forcemode 1
+#define startmode 3
 #define create_zero 0
 #define sensor_f_IR 0
 #define sensor_f_IR_dark 800
@@ -55,7 +55,7 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define claw_servo 1
 #define claw_open_pos 100
 #define claw_close_pos 2000
-#define claw_down_speed -20
+#define claw_down_speed -25
 #define claw_up_speed_max 50
 #define claw_up_speed_min 1
 #define claw_motor 1

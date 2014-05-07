@@ -11,13 +11,12 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 //Init function that starts most things needed for the Retreev
 void init(int port) { //Port refers to the analog port used to grab light sensor information
     values(); //Sets all values found in values.h. THIS SHOULD ALWAYS BE FIRST OR ELSE THINGS /WILL/ BREAK
-    display_clear(); //The camera library is somehow buggy and outputs a ton of garbage warnings when starting up. This at least gets rid of it.
     if(debugmode==1) printf("Camera started. \n");
     enable_servos();
     if(debugmode==1) printf("Servos enabled. \n");
     create_connect();
     if(debugmode==1) printf("Create connected. \n");
-    if (createmode==1){ //This if statement reads the createmode value and sets it accordingly
+    if(createmode==1){ //This if statement reads the createmode value and sets it accordingly
         create_full();
         printf("!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\nCREATE IS IN FORCE MODE. IT WILL NOT STOP AT CLIFFS\n!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\n");
     } else {
@@ -32,21 +31,18 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
     else{
         printf("Create battery level %g%%\n", create_battery_now);
     }
-    if (side_button() == 1) { //The rest of the function initates the startlight function. If the side hardware button is pressed, it will call the wait_for_light function, which is built in [This should be used during the real competition, but for testing, the value from lightvalue will suffice]. Alternatively, you can override this entire function by setting forcemode to 1, in values.h
+    if(startmode==1) {
         if (debugmode==1) printf ("Manual calibration mode \n");
         wait_for_light(port);
-    } else {
+    }
+    if(startmode==2) {
         if (debugmode==1) printf("Using predetermined light value: %d \n", lightvalue);
         set_b_button_text("Force");
         if (debugmode==1) printf("Current LS: %d \nWaiting for trigger or force", analog10(port));
-        while(analog10(port) > lightvalue && b_button()==0 && forcemode==0) {
-            if (b_button()==1) {
-                if(debugmode==1) printf("Start forced, waiting two seconds \n");
-                sleep(2);
-            }
-        }
+        while(analog10(port) > lightvalue && b_button()==0 && forcemode==0)
     }
-
+    if(debugmode==1)printf("No startmode defined. Automatically starting in 2 seconds." \n);
+    sleep(2);
 }
 
 /*
@@ -94,15 +90,13 @@ void create_180() {
     }
 }
 
-void turn_until(int action2) {
-    if(action2==1) {
-        if(debugmode==1) printf("Turning until black line alignment\n");
-        while(analog10(sensor_f_IR) < sensor_f_IR_dark || analog10(sensor_r_IR) < sensor_r_IR_dark) {
-            create_spin_CCW(create_turn_speed_slow);
-            if (debugmode==1) printf("F: %d R: %d\n",analog10(sensor_f_IR),analog10(sensor_r_IR));
-        }
-
+void black_align {
+    if(debugmode==1) printf("Turning until black line alignment\n");
+    while(analog10(sensor_f_IR) < sensor_f_IR_dark || analog10(sensor_r_IR) < sensor_r_IR_dark) {
+        create_spin_CCW(create_turn_speed_slow);
+        if (debugmode==1) printf("F: %d R: %d\n",analog10(sensor_f_IR),analog10(sensor_r_IR));
     }
+
 }
 void create_black_align() {
     setzero_distance();
@@ -131,13 +125,17 @@ void create_go_forward(int distance_create) {
 }
 
 void raise_claw() {
-    while(ispress_height() == false) {
+    while(ispressed_height() == false) {
+        if(debugmode==1) printf("Lifting claw\n");
         motor(claw_motor,claw_up_speed_max);
     }
 }
 
 void lower_claw() {
-    /* Lower claw */
+    while(ispressed_height() == false) {
+        if(debugmode==1) printf("Lifting claw\n");
+        motor(claw_motor,claw_down_speed);
+    }
 }
 
 void close_claw() {

@@ -8,6 +8,14 @@ bool isdark_front() {
     }
 }
 
+bool isdark_rear() {
+    if(analog10(sensor_r_IR) > sensor_r_IR_dark) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 bool isdark_right() {
     if(analog10(sensor_rt_IR) > sensor_rt_IR_dark) {
         return true;
@@ -24,7 +32,7 @@ bool isdark_left() {
     }
 }
 
-bool ispress_claw() {
+bool ispressed_claw() {
         if(digital(claw_switch) == 1) {
             return true;
         } else {
@@ -32,7 +40,7 @@ bool ispress_claw() {
         }
 }
 
-bool ispress_height() {
+bool ispressed_height() {
         if(digital(height_switch) == 1) {
             return true;
         } else {
