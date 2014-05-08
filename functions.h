@@ -10,7 +10,7 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 
 //Init function that starts most things needed for the Retreev
 void init(int port) { //Port refers to the analog port used to grab light sensor information
-    values(); //Sets all values found in values.h. THIS SHOULD ALWAYS BE FIRST OR ELSE THINGS /WILL/ BREAK
+    /* values(); sets all values found in values.h. THIS SHOULD ALWAYS BE FIRST OR ELSE THINGS /WILL/ BREAK*/
     if(debugmode==1) printf("Camera started. \n");
     enable_servos();
     if(debugmode==1) printf("Servos enabled. \n");
@@ -72,6 +72,7 @@ void create_direct_left() { //This turns the Create, in place, 90 degrees to the
         printf("%d\n", get_create_normalized_angle());
         create_spin_CCW(create_turn_speed);
     }
+    create_stop();
 }
 
 void create_direct_right() {
@@ -80,6 +81,7 @@ void create_direct_right() {
     while(get_create_normalized_angle() > create_right_turn) {
         create_spin_CW(create_turn_speed);
     }
+    create_stop();
 }
 
 void create_180() {
@@ -88,6 +90,7 @@ void create_180() {
     while(get_create_normalized_angle() < create_180_turn) {
         create_spin_CCW(create_turn_speed);
     }
+    create_stop();
 }
 
 void black_align() {
@@ -96,23 +99,14 @@ void black_align() {
         create_spin_CCW(create_turn_speed_slow);
         if (debugmode==1) printf("F: %d R: %d\n",analog10(sensor_f_IR),analog10(sensor_r_IR));
     }
-
+    create_stop();
 }
 void create_black_align() {
     setzero_distance();
     while(get_create_distance() < 4) {
         create_drive_straight(create_backward_speed_slow);
     }
-    /*
-    setzero_angle();
-    while(get_create_angle() < 4) {
-    create_spin_CW(100);
-}
-setzero_distance();
-while(get_create_distance() < -4) {
-create_drive_straight(create_forward_speed_slow);
-}
-*/
+    create_stop();
 }
 
 void create_go_forward(int distance_create) {
@@ -120,8 +114,9 @@ void create_go_forward(int distance_create) {
     distance_create=distance_create*-1;
     while(get_create_distance() > distance_create) {
         if(debugmode==1) printf("Going %d. At %d.\n",distance_create,get_create_distance());
-        create_drive_straight(create_forward_speed);
+        create_drive_straight(create_forward_speed_slow);
     }
+    create_stop();
 }
 
 void raise_claw() {
@@ -129,8 +124,15 @@ void raise_claw() {
         if(debugmode==1) printf("Lifting claw\n");
         motor(claw_motor,claw_up_speed_max);
     }
-	ao();
-	msleep(500);
+    ao();
+    msleep(500);
+}
+
+void raise_claw_timed() {
+    if(debugmode==1) printf("Lifting claw\n");
+    motor(claw_motor,claw_up_speed_max);
+    sleep(4);
+    ao();
 }
 
 void lower_claw() {
@@ -138,8 +140,8 @@ void lower_claw() {
         if(debugmode==1) printf("Lifting claw\n");
         motor(claw_motor,claw_down_speed);
     }
-	ao();
-	msleep(500);
+    ao();
+    msleep(500);
 }
 
 void close_claw() {
@@ -150,4 +152,18 @@ void close_claw() {
 void open_claw() {
     if(debugmode==1) printf("Opening claw on port %d\n", claw_servo);
     set_servo_position(claw_servo,claw_open_pos);
+}
+
+
+void thread_start_raise_claw() {
+    rc = thread_create(raise_claw_timed);
+    thread_start(rc);
+    if(debugmode==1) printf("Claw raise thread started. \n");
+}
+
+
+void thread_start_lower_claw() {
+    lc = thread_create(lower_claw);
+    thread_start(lc);
+    if(debugmode==1) printf("Claw raise thread started. \n");
 }
