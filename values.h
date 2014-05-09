@@ -1,4 +1,3 @@
-#include "setvar.h"
 /*
 This is a file that sets variables for the various Retreev functions. Editing these numbers is not recommended unless it's necessary.
 
@@ -27,12 +26,31 @@ SENSOR_IR: The port where the IR sensor will be found. Will be analog, so it sho
 
 SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010)
 */
+/*
+
+Deprecated variables for camera usage
+int objectx;
+int objecty;
+int objecth;
+int objectany;
+int objecttopy;
+int x;
+int y;
+int z;
+*/
+
+int claw_speed;
+float create_battery_now;
+int create_distance;
+thread rc;
+thread lc;
+thread rct;
 
 #define lightvalue 950
 #define debugmode 1
 #define createmode 1
 #define create_warn_batt 25
-#define startmode 3
+#define startmode 2
 #define create_zero 0
 #define sensor_f_IR 0
 #define sensor_f_IR_dark 800
@@ -48,6 +66,7 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define create_turn_speed 250
 #define create_turn_speed_slow 100
 #define create_forward_speed_slow -100
+#define create_forward_speed_very_slow -50
 #define create_forward_speed -200
 #define create_backward_speed 200
 #define create_backward_speed_slow 100
@@ -61,7 +80,4 @@ SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hover
 #define claw_motor 1
 #define height_switch 10
 #define bottom_switch 14
-thread rc;
-thread lc;
-
 
