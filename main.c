@@ -2,7 +2,7 @@
 
 int main() {
 	init(5);
-	open_claw();
+	shut_down_in(100.0);
 	create_direct_left();
 	while(isdark_front() == false) {
 		create_drive_straight(create_forward_speed);
@@ -35,15 +35,17 @@ int main() {
 	create_go(80);
 	open_claw();
 	thread_start_raise_claw();
-	create_go(210);
+	create_go(180);
 	thread_destroy(rc);
 	thread_start_lower_claw();
-	create_go(-260);
+	create_go(-200);
+	half_claw();
 	create_direct_left();
+	sleep(10);
 	create_go(950);
 	create_direct_left();
 	create_spin_CCW(create_turn_speed_slow);
-	msleep(85);
+	msleep(90);
 	create_stop();
 	lower_claw();
 	while(ispressed_claw() == false) {
@@ -58,6 +60,9 @@ int main() {
 	create_go(960);
 	create_direct_left();
 	create_spin_CCW(create_turn_speed_slow);
-	msleep(100);
-	create_go_(75);
+	msleep(20);
+	create_stop();
+	create_go(75);
+	create_stop();
+	lower_claw_timed();
 }

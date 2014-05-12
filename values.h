@@ -1,3 +1,4 @@
+#include <time.h>
 /*
 This is a file that sets variables for the various Retreev functions. Editing these numbers is not recommended unless it's necessary.
 
@@ -45,6 +46,10 @@ int create_distance;
 thread rc;
 thread lc;
 thread rct;
+clock_t start_time;
+clock_t stop_time;
+float create_battery;
+float create_battery_total;
 
 #define lightvalue 950
 #define debugmode 1
@@ -78,6 +83,7 @@ thread rct;
 #define claw_up_speed_max 100
 #define claw_up_speed_min 1
 #define claw_motor 1
+#define claw_half_pos 1000
 #define height_switch 10
 #define bottom_switch 14
 

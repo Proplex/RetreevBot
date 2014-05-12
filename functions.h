@@ -4,6 +4,7 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 
 #include "values.h"
 #include "booleans.h"
+#include <time.h>
 
 
 //Init function that starts most things needed for the Retreev
@@ -20,6 +21,7 @@ objecttopy=get_object_bbox(0,0).uly;
 if(debugmode==1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
 }
 */
+
 void setzero_angle() { //This normalizes the angle distance the Create uses to measure how far it has turned. The value can be set using create_zero, found in values.h
     set_create_normalized_angle(create_zero);
     if(debugmode==1) printf("Angle measure set to %d\n", create_zero);
@@ -112,6 +114,13 @@ void raise_claw_timed() {
     ao();
 }
 
+void lower_claw_timed() {
+    if(debugmode==1) printf("Lowering claw\n");
+    motor(claw_motor,claw_down_speed);
+    sleep(2);
+    ao();
+}
+
 void lower_claw() {
     if(debugmode==1) printf("Lowering claw\n");
     while(ispressed_bottom() == false) {
@@ -124,6 +133,11 @@ void lower_claw() {
 void close_claw() {
     if(debugmode==1) printf("Closing claw on port %d\n", claw_servo);
     set_servo_position(claw_servo,claw_close_pos);
+}
+
+void half_claw() {
+    if(debugmode==1) printf("Halfing claw on port %d\n", claw_servo);
+    set_servo_position(claw_servo,claw_half_pos);
 }
 
 void open_claw() {
@@ -166,7 +180,9 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
         create_safe();
         if(debugmode==1) printf("Create is in safe mode\n");
     }
-    create_battery_now=(((double)get_create_battery_charge())/get_create_battery_capacity())*100;
+    create_battery=get_create_battery_charge(); //These next few lines calculates the Create's battery, which is rather annoying since the Create itself doesn't have a function that does this. It will warn the user if the battery percentage is under the amount specified by create_warn_batt, found in values.h
+    create_battery_total=get_create_battery_capacity();
+    create_battery_now=(((double)create_battery)/create_battery_total)*100;
     if (create_battery_now < create_warn_batt) {
         printf("!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\nCREATE BATTERY LOW. BATTERY AT %g%%\n!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!\n", create_battery_now);
         sleep(3);
@@ -174,16 +190,25 @@ void init(int port) { //Port refers to the analog port used to grab light sensor
     else{
         printf("Create battery level %g%%\n", create_battery_now);
     }
+	close_claw();
     if(startmode==1) {
         if (debugmode==1) printf ("Manual calibration mode \n");
         wait_for_light(port);
+		start_time = clock();
+		open_claw();
     }
     if(startmode==2) {
         if (debugmode==1) printf("Using predetermined light value: %d \n", lightvalue);
         set_b_button_text("Force");
         if (debugmode==1) printf("Current LS: %d \nWaiting for trigger or force", analog10(port));
         while(analog10(port) > lightvalue && b_button()==0) {}
+		start_time = clock();
+		open_claw();
     }
+    if(startmode==3) {
     if(debugmode==1)printf("No startmode defined. Automatically starting in 2 seconds.\n");
     sleep(2);
+	start_time = clock();
+	open_claw();
+}
 }
