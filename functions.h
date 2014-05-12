@@ -10,17 +10,17 @@ This file includes most of the functions called by the RetreevBot. Threads can b
 //Init function that starts most things needed for the Retreev
 
 
-/*
-void camget() {
-camera_update();
-objectx=get_object_center(0,0).x;
-objecty=get_object_center(0,0).y;
-objecth=get_object_bbox(0,0).height;
-objectany=get_object_count(0);
-objecttopy=get_object_bbox(0,0).uly;
-if(debugmode==1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
+if(camfunc==1) {
+    void camget() {
+        camera_update();
+        objectx=get_object_center(0,0).x;
+        objecty=get_object_center(0,0).y;
+        objecth=get_object_bbox(0,0).height;
+        objectany=get_object_count(0);
+        objecttopy=get_object_bbox(0,0).uly;
+        if(debugmode==1) printf("X: %d Y: %d H: %d C: %d YH: %d \n", objectx, objecty, objecth, objectany, objecttopy);
+    }
 }
-*/
 
 void setzero_angle() { //This normalizes the angle distance the Create uses to measure how far it has turned. The value can be set using create_zero, found in values.h
     set_create_normalized_angle(create_zero);

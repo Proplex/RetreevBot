@@ -27,18 +27,19 @@ SENSOR_IR: The port where the IR sensor will be found. Will be analog, so it sho
 
 SENSOR_IR_DARKNESS: The minimum threshold the IR sensor should report when hovering over dark tape. (0-1010)
 */
-/*
 
-Deprecated variables for camera usage
-int objectx;
-int objecty;
-int objecth;
-int objectany;
-int objecttopy;
-int x;
-int y;
-int z;
-*/
+
+if (camfunc==1) {
+	int objectx;
+	int objecty;
+	int objecth;
+	int objectany;
+	int objecttopy;
+	int x;
+	int y;
+	int z;
+
+}
 
 int claw_speed;
 float create_battery_now;
@@ -86,4 +87,4 @@ float create_battery_total;
 #define claw_half_pos 1000
 #define height_switch 10
 #define bottom_switch 14
-
+#define camfunc 1
